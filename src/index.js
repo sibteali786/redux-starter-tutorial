@@ -1,5 +1,6 @@
 import {compose , pipe} from "lodash/fp";
 import {Map} from "immutable";
+import {produce} from "immer";
 
 function sayHello(){
     return "Hello World"
@@ -105,16 +106,44 @@ console.log(removed);
 const updated_array = numbers.map(n => n === 2 ? 20:n);
 console.log(updated_array);
 
-// Imuutable.js 
-let book = Map({
-    title:"Harry Potter"
-});
+/* *****************Imuutable.js**************************/
+
+
+
+
+// let book = Map({
+//     title:"Harry Potter"
+// });
+
+// function publish(book){
+//     return book.set("isPublished",true);
+// }
+
+// book = publish(book);   // re assigining as object is immutable thus needs to return and 
+// // re assign to book again 
+// // console.log(book.get("title")); 
+// console.log(book.toJS()); 
+
+
+
+
+
+
+
+
+
+/********************* Immer ********************************** */
+
+let book = {
+    title : "Harry Potter "
+};
 
 function publish(book){
-    return book.set("isPublished",true);
+    return produce(book,draftBook => {
+        draftBook.isPublished = true;
+    });
 }
 
-book = publish(book);   // re assigining as object is immutable thus needs to return and 
-// re assign to book again 
-// console.log(book.get("title")); 
-console.log(book.toJS()); 
+let updated_book = publish(book);
+console.log(updated_book);
+console.log(book); 

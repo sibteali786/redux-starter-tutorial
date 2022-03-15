@@ -12,6 +12,6 @@ add1(5);
 // Another way 
 
 add(1)(5);
-
+    
 // another way
 const add2 = a => b => a+b; // (a,b) => a+b
