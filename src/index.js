@@ -149,6 +149,8 @@
 // console.log(book); 
 
 
+import { bugAdded, bugRemoved, bugResolved } from "./actionCreators";
+import { BUG_ADDED, BUG_REMOVED } from "./actionTypes";
 import store from "./store";
 
 // Observing Chnages made in the store 
@@ -156,22 +158,14 @@ const unsubscribe = store.subscribe(()=>{
     console.log("Store Changed !", store.getState());
 })
 // Adding dispatch 
-store.dispatch({
-    type:"bugAdded",
-    payload:{
-        description:"Bug1", 
-    }
-})
+store.dispatch(bugAdded("Bug1"))
 
 unsubscribe();
 
 // Removing Dispatch
-store.dispatch({
-    type:"bugRemoved",
-    payload:{
-        id:1
-    }
-})
+store.dispatch(bugRemoved(1))
+
+store.dispatch(bugResolved(1))
 
 console.log(store.getState());
 
